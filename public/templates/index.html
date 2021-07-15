@@ -11,12 +11,16 @@
         <th>Title</th>
         <th>Description</th>
         <th>CreatedOn</th>
+        <th>Actions</th>
    </tr>
   {{range $key,$value:= .}}
     <tr>
         <td>{{$value.Title}}</td>
         <td>{{$value.Desc}}</td>
         <td>{{$value.CreatedOn}}</td>
+        <td>
+          <a href="/del/{{$key}}">Delete</a>
+        </td>
     </tr>
   {{end}}
 </table>

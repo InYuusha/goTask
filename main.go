@@ -45,6 +45,7 @@ func addNote(res http.ResponseWriter,req*http.Request){
 	renderTemplate(res,"add","base",nil)
 }
 func saveNote(res http.ResponseWriter,req *http.Request){
+	
 	req.ParseForm()
 	title:=req.PostFormValue("title")
 	desc:=req.PostFormValue("desc")
@@ -55,12 +56,23 @@ func saveNote(res http.ResponseWriter,req *http.Request){
 	noteStore[k]=note
 	http.Redirect(res,req,"/",302)
 }
+func delNote(res http.ResponseWriter,req *http.Request){
+	vars:=mux.Vars(req)
+	id:=vars["id"]
+	if _,ok:=noteStore[id];ok{
+		delete(noteStore,id)
+	}else{
+		http.Error(res,"Doesnt exists",404)
+	}
+	http.Redirect(res,req,"/",302)
+}
 func main(){
 	r:=mux.NewRouter().StrictSlash(false)
 	
 	r.HandleFunc("/",getNotes)
 	r.HandleFunc("/add",addNote)
 	r.HandleFunc("/save",saveNote)
+	r.HandleFunc("/del/{id}",delNote)
 
 	server:=&http.Server{
 		Addr:":3000",
