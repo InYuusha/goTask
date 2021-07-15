@@ -1,0 +1,24 @@
+{{define "head"}}
+<title>Home</title>
+{{end}}
+
+{{define "body"}}
+<h1>Notes</h1>
+<a href="/add">Add Note</a>
+
+<table border="2">
+   <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>CreatedOn</th>
+   </tr>
+  {{range $key,$value:= .}}
+    <tr>
+        <td>{{$value.Title}}</td>
+        <td>{{$value.Desc}}</td>
+        <td>{{$value.CreatedOn}}</td>
+    </tr>
+  {{end}}
+</table>
+
+{{end}}

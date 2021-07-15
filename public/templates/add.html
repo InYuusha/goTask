@@ -1,0 +1,13 @@
+{{define "head"}}
+<title>Add Note</title>
+{{end}}
+
+{{define "body"}}
+<h1>Add Note</h1>
+<form action="/save" method="POST">
+    <p>Title: <input name="title" type="text"></p>
+    <br>
+    <p>Desc:<textarea name="desc" rows="4" cols="50" type="text"></textarea></p>
+    <input type="submit" value="Add">
+</form>
+{{end}}
